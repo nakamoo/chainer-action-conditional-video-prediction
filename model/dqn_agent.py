@@ -29,7 +29,7 @@ class Q(Chain):
         if on_gpu:
             self.to_gpu()
     
-    def __call__(self, state: np.ndarray):
+    def __call__(self, state):
         _state = self.arr_to_gpu(state)
         s = Variable(_state)
         h1 = F.relu(self.l1(s))
@@ -112,7 +112,7 @@ class DQNAgent(Agent):
 
     def get_state(self):
         state = []
-        for  i in range(self.q.n_history):
+        for i in range(self.q.n_history):
             if i < len(self._state):
                 state.append(self._state[i])
             else:
